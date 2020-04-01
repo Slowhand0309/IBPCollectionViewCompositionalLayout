@@ -101,11 +101,12 @@
     if (group.count > 0) {
         IBPNSCollectionLayoutItem *item = group.subitems[0];
         IBPNSDirectionalEdgeInsets contentInsets = item.contentInsets;
-
+        NSLog(@"[F] IBPNSCollectionLayoutItem isEstimated: %d", item.layoutSize.heightDimension.isEstimated ? 1 : 0);
         contentFrame.origin.x += item.edgeSpacing.leading.spacing;
         contentFrame.origin.y += item.edgeSpacing.top.spacing;
 
         CGSize itemSize = [item.layoutSize effectiveSizeForContainer:container];
+        NSLog(@"[F] itemSize: %f, %f", itemSize.width, itemSize.height);
         IBPNSCollectionLayoutContainer *itemContainer = [[IBPNSCollectionLayoutContainer alloc] initWithContentSize:itemSize contentInsets:contentInsets];
 
         if (item.isGroup) {
@@ -148,7 +149,9 @@
                 return;
             }
 
+            NSLog(@"[F] before itemSize: %f, %f", itemSize.width, itemSize.height);
             itemSize.width = (CGRectGetWidth(containerFrame) - interItemFixedSpacing * (group.count - 1)) / group.count;
+            NSLog(@"[F] after itemSize: %f, %f", itemSize.width, itemSize.height);
             contentFrame.size = itemSize;
 
             for (NSInteger i = 0; i < group.count; i++) {
