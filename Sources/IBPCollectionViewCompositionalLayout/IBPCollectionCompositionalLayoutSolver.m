@@ -153,15 +153,24 @@
             itemSize.width = (CGRectGetWidth(containerFrame) - interItemFixedSpacing * (group.count - 1)) / group.count;
             NSLog(@"[F] after itemSize: %f, %f", itemSize.width, itemSize.height);
             contentFrame.size = itemSize;
-
+            NSLog(@"[F] 1 itemSize: %f, %f", itemSize.width, itemSize.height);
+            NSLog(@"[F] 1 contentFrame: %f, %f", contentFrame.size.width, contentFrame.size.height);
             for (NSInteger i = 0; i < group.count; i++) {
                 CGRect cellFrame = UIEdgeInsetsInsetRect(contentFrame, UIEdgeInsetsMake(contentInsets.top, contentInsets.leading, contentInsets.bottom, contentInsets.trailing));
+                NSLog(@"[F] 2 itemSize: %f, %f", itemSize.width, itemSize.height);
+                NSLog(@"[F] 2 contentFrame: %f, %f", contentFrame.size.width, contentFrame.size.height);
                 if (i > 0) {
                     cellFrame.origin.x += item.edgeSpacing.trailing.spacing;
                     cellFrame.size.width -= item.edgeSpacing.trailing.spacing;
                 }
+                NSLog(@"[F] 3 itemSize: %f, %f", itemSize.width, itemSize.height);
+                NSLog(@"[F] 3 contentFrame: %f, %f", contentFrame.size.width, contentFrame.size.height);
                 [self.results addObject:[IBPCollectionCompositionalLayoutSolverResult resultWithLayoutItem:item frame:cellFrame]];
+                NSLog(@"[F] 4 itemSize: %f, %f", itemSize.width, itemSize.height);
+                NSLog(@"[F] 4 contentFrame: %f, %f", contentFrame.size.width, contentFrame.size.height);
                 contentFrame.origin.x += interItemFixedSpacing + CGRectGetWidth(contentFrame);
+                NSLog(@"[F] 5 itemSize: %f, %f", itemSize.width, itemSize.height);
+                NSLog(@"[F] 5 contentFrame: %f, %f", contentFrame.size.width, contentFrame.size.height);
             }
         }
         if (group.isVerticalGroup) {
